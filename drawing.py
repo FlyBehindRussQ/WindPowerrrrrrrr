@@ -119,6 +119,7 @@ class Plots(Imports):
         self.layout_error.addWidget(data.errorPlot,0,0)
         
     def plot_show(self):
+        ###################### data
         self.layout_data = QtWidgets.QGridLayout()
         self.view_data = QtWidgets.QLabel(self.Tab_Data)
         self.layout_data.addWidget(self.view_data,0,0,1,1)
@@ -129,13 +130,68 @@ class Plots(Imports):
         except:
             pass
         self.view_data.hide()
-        img = Image("stl.png")
+        img = Image.open("data_after.png")
         data.dataPlot = MyFigure(view=self.view_data)
         data.dataPlot_Toolbar = NavigaionToolbar(data.dataPlot,self)
         data.dataPlot.axes = data.dataPlot.fig.add_subplot(111)
         data.dataPlot.axes.imshow(img)
-        data.dataPlot.axes.set_title("数据集")
-        data.dataPlot.axes.set_xlabel("风速(m/s)")
-        data.dataPlot.axes.set_ylabel("功率(W)")
+        data.dataPlot.axes.axis('off')
         self.layout_data.addWidget(data.dataPlot,0,1,3,1)
         self.layout_data.addWidget(data.dataPlot_Toolbar,3,1)
+
+        ###################### decom
+        self.layout_decom = QtWidgets.QGridLayout()
+        self.view_decom = QtWidgets.QLabel(self.Tab_Decom)
+        self.layout_decom.addWidget(self.view_decom,0,0,1,1)
+        self.Layout_DecomView.addLayout(self.layout_decom,0,0,1,1)
+        try:
+            sip.delete(data.decomPlot)
+            sip.delete(data.decomPlot_Toolbar)
+        except:
+            pass
+        self.view_decom.hide()
+        img = Image.open("stl.png")
+        data.decomPlot = MyFigure(view=self.view_decom)
+        data.decomPlot_Toolbar = NavigaionToolbar(data.decomPlot,self)
+        data.decomPlot.axes = data.decomPlot.fig.add_subplot(111)
+        data.decomPlot.axes.imshow(img)
+        data.decomPlot.axes.axis('off')
+        self.layout_decom.addWidget(data.decomPlot,0,1,3,1)
+        self.layout_decom.addWidget(data.decomPlot_Toolbar,3,1)
+
+        ###################### model
+        self.layout_model = QtWidgets.QGridLayout()
+        self.view_model = QtWidgets.QLabel(self.Tab_Model)
+        self.layout_model.addWidget(self.view_model,0,0,1,1)
+        self.Layout_ModelView.addLayout(self.layout_model,0,0,1,1)
+        try:
+            sip.delete(data.modelPlot)
+            sip.delete(data.modelPlot_Toolbar)
+        except:
+            pass
+        self.view_model.hide()
+        img = Image.open("SARIMAX.png")
+        data.modelPlot = MyFigure(view=self.view_model)
+        data.modelPlot_Toolbar = NavigaionToolbar(data.modelPlot,self)
+        data.modelPlot.axes = data.modelPlot.fig.add_subplot(111)
+        data.modelPlot.axes.imshow(img)
+        data.modelPlot.axes.axis('off')
+        self.layout_model.addWidget(data.modelPlot,0,1,3,1)
+        self.layout_model.addWidget(data.modelPlot_Toolbar,3,1)
+
+        ###################### error
+        self.layout_error = QtWidgets.QGridLayout()
+        self.view_error = QtWidgets.QLabel(self.Tab_Error)
+        self.layout_error.addWidget(self.view_error,0,0,1,1)
+        self.Layout_ErrorView.addLayout(self.layout_error,0,0,1,1)
+        try:
+            sip.delete(data.errorPlot)
+        except:
+            pass
+        self.view_error.hide()
+        img = Image.open("loss.png")
+        data.errorPlot = MyFigure(view=self.view_error)
+        data.errorPlot.axes = data.errorPlot.fig.add_subplot(111)
+        data.errorPlot.axes.imshow(img)
+        data.errorPlot.axes.axis('off')
+        self.layout_error.addWidget(data.errorPlot,0,1,3,1)

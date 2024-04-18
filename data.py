@@ -9,6 +9,7 @@ modelPlot = None
 errorPlot = None
 dataPlot_Toolbar = None
 modelPlot_Toolbar = None
+decomPlot_Toolbar = None
 
 #####################
 ## DATA
@@ -32,7 +33,7 @@ mode_list = ['RNN','MLP','LSTM','GRU','CNN']
 
 model = None
 
-train_size = 1000
+train_size = 16400
 train_ratio = 0.8
 window_size = 64
 batch_size = 32
